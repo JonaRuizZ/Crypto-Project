@@ -2,7 +2,9 @@ import Crypto from "../components/Crypto";
 
 const Home = () => {
     return (
-        <Crypto />
+        <div className="container mx-auto pt-4">
+            <Crypto />
+        </div>
     )
 };
 

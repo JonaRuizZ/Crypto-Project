@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import CardCrypto from "./CardCrypto";
 
 const Crypto = () => {
     const API_URL = import.meta.env.VITE_API_URL;
@@ -13,8 +14,8 @@ const Crypto = () => {
             console.log(data.data.data) // La respuesta en json se llamará "data" e imprimímos la data
             setCryptos(data.data.data)
         })
-        .catch(() => {
-            console.error("Hubo un error en la petición")
+        .catch((err) => {
+            console.error(`Hubo un error en la petición ${err}`)
         })
     }, []); // El array vacío significa que se ejecute solo una vez+
 
@@ -22,11 +23,11 @@ const Crypto = () => {
 
     return (
         <>
-            <h1 className="text-center text-2xl">Las 100 Cryptomonedas más famosas</h1>
-            <ul>
+            <h1 className="text-center text-2xl pb-4">Las 100 Cryptomonedas más famosas</h1>
+            <ul className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-7">
                 {
-                    Cryptos.map(({ id, symbol, name, priceUsd }) => (
-                        <li key={id}>Symbol: {symbol}, Name: {name}, PriceUSD {priceUsd}</li>
+                    Cryptos.map(({ id, symbol, name, priceUsd, changePercent24Hr }) => (
+                        <CardCrypto key={id} symbol={symbol} name={name} priceUsd={priceUsd} changePercent24Hr={changePercent24Hr} />
                     ))
                 }
             </ul>
