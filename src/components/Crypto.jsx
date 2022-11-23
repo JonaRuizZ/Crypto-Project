@@ -22,18 +22,18 @@ const Crypto = () => {
     if(!Cryptos) return <span>Cargando datos...</span>
 
     return (
-        <>
+        <div className="pl-20 pr-5">
             <h1 className="text-center text-2xl pb-4">Las 100 Cryptomonedas más famosas</h1>
-            <ul className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-7">
+            <ul className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-7">
                 {
                     Cryptos.map(({ id, symbol, name, priceUsd, changePercent24Hr }) => (
                     //  <CardCrypto nombreCualquiera = { propiedad del JSON } />
                     //  El nombreCualquiera debe estar igual en el componente CardCrypto (CardCrypto.jsx en las props)
-                        <CardCrypto key={id} symbol={symbol} name={name} priceUSD={priceUsd} changePercent={changePercent24Hr} />
+                        <CardCrypto key={id} symbol={symbol} name={name} priceUSD={priceUsd} changePercent={changePercent24Hr} id={id} />
                     ))
                 }
             </ul>
-        </>
+        </div>
     )
 };
 
