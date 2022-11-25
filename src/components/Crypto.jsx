@@ -19,11 +19,11 @@ const Crypto = () => {
             })
     }, []); // El array vacío significa que se ejecute solo una vez+
 
-    if (!Cryptos) return <span className="flex justify-center h-screen bg-blue-100">Cargando datos...</span>
+    if (!Cryptos) return <span className="flex justify-center h-screen bg-slate-700 text-white font-bold text-2xl pt-4">Cargando datos...</span>
 
     return (
-        <div className="pl-20 pr-5 bg-blue-100">
-            <h1 className="text-center text-2xl pb-4">Las 100 Cryptomonedas más famosas</h1>
+        <div className="pl-20 pr-5 bg-slate-700">
+            <h1 className="text-center text-2xl p-5 text-white">Las 100 Cryptomonedas más famosas</h1>
             <ul className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-7">
                 {
                     Cryptos.map(({ id, symbol, name, priceUsd, changePercent24Hr }) => (
