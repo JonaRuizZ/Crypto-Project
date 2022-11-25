@@ -77,14 +77,24 @@ const Cryptomoneda = () => {
                             <span>vwap24Hr: {info.vwap24Hr}</span>
                         </li>
                     </ul>
-                    <ul>
-                        <li>
-                            <span>History</span>
-                        </li>
-                        <li>
-                            <span>{JSON.stringify(history)}</span>
-                        </li>
-                    </ul>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>fecha</th>
+                                <th>precio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                history.map(({ date, priceUsd, time }) => (
+                                    <tr key={time}>
+                                        <td>{date}</td>
+                                        <td>{priceUsd}</td>
+                                    </tr>
+                                ))
+                            }
+                        </tbody>
+                    </table>
                 </div>
                 <Link to="/cryptomonedas" className="bg-blue-500 p-4 rounded-lg hover:bg-blue-400 duration-300 text-white m-4">Volver atrás</Link>
             </div>
