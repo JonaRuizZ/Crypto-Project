@@ -11,7 +11,7 @@ const usePetition = endpoint => {
                 setData(data.data.data)
             })
             .catch((err) => {
-                console.log(`Hay un error: ${err}`)
+                console.error(`Hay un error: ${err}`)
             });
     }, []);
 
