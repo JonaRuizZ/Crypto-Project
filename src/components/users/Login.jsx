@@ -1,7 +1,11 @@
 import axios from "axios";
 import { useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Login = () => {
+
+    const navigation = useNavigate()
+
     const [data, setData] = useState({
         email: "",
         password: ""
@@ -18,11 +22,15 @@ const Login = () => {
         e.preventDefault();
         console.log(data.email, data.password)
         axios.post(`https://reqres.in/api/login`, data)
-        .then(res => {
-            localStorage.setItem("Shhhh", res.data.token) // Guardar el token el localStorage, seteamos el item como "Shhhh" y como segundo parametro el valor ¿Dónde está el token? en res.data.token
-        })// .then(res => console.log(res))
-        .catch(err => console.error(`Ha ocurrido el siguiente error: ${err}`))
+            .then(res => {
+                localStorage.setItem("Shhhh", res.data.token) // Guardar el token el localStorage, seteamos el item como "Shhhh" y como segundo parametro el valor ¿Dónde está el token? en res.data.token
+                navigation("/")
+            })// .then(res => console.log(res))
+            .catch(err => console.error(`Ha ocurrido el siguiente error: ${err}`))
     };
+    
+    // Si el usuario ya tiene un token, entonces cuando quiera ir a /login me tire directamente a "/" (Ey este usuario ya está logeado, no necesita logearse)
+    if(localStorage.getItem("Shhhh")) return <Navigate to="/" />
 
     return (
         <div className=" bg-gradient-to-r from-sky-500 to-indigo-500 h-screen pt-10">

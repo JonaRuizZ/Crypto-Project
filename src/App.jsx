@@ -1,8 +1,11 @@
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import Menu from "./components/Menu";
 
 const App = () => {
-    return(
+    // Si NO TENGO el token, entonces llevame al /login
+    if (!localStorage.getItem("Shhhh")) return <Navigate to="/login" />
+
+    return (
         <>
             <Menu />
             <Outlet />
