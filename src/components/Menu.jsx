@@ -11,7 +11,7 @@ const Menu = () => {
 
     return (
         <nav className="bg-gray-600 fixed h-screen border-r border-gray-500">
-            <ul className={`${!open ? "w-16 ease-in" : "w-64 ease-out"} duration-300`}>
+            <ul className={`${!open ? "w-16 ease-in" : "w-64 ease-out"} duration-500`}>
                 <li className="flex border-b border-gray-500 justify-between">
                     {
                         <NavLink to="/" className={`${open ? "px-5 flex items-center" : "hidden"}`}>

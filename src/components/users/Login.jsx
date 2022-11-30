@@ -18,19 +18,29 @@ const Login = () => {
         })
     };
 
+    const [cargando, setCargando] = useState(false);
+    const [error, setError] = useState();
+
     const submit = (e) => {
         e.preventDefault();
-        console.log(data.email, data.password)
+        setCargando(true)
+        setError(null)
+        // console.log(data.email, data.password)
         axios.post(`https://reqres.in/api/login`, data)
             .then(res => {
+                setCargando(false)
                 localStorage.setItem("Shhhh", res.data.token) // Guardar el token el localStorage, seteamos el item como "Shhhh" y como segundo parametro el valor ¿Dónde está el token? en res.data.token
                 navigation("/")
             })// .then(res => console.log(res))
-            .catch(err => console.error(`Ha ocurrido el siguiente error: ${err}`))
+            .catch(err => {
+                setCargando(false)
+                // console.table(err)
+                setError(err.response.data.error)
+            })
     };
-    
+
     // Si el usuario ya tiene un token, entonces cuando quiera ir a /login me tire directamente a "/" (Ey este usuario ya está logeado, no necesita logearse)
-    if(localStorage.getItem("Shhhh")) return <Navigate to="/" />
+    if (localStorage.getItem("Shhhh")) return <Navigate to="/" />
 
     return (
         <div className=" bg-gradient-to-r from-sky-500 to-indigo-500 h-screen pt-10">
@@ -50,9 +60,12 @@ const Login = () => {
                         <input onChange={changeData} className="p-2 h-8 rounded-md shadow-md" type="password" name="password" required />
                     </div>
                     <div>
-                        <input type="submit" value="Ingresar" className="cursor-pointer bg-sky-500 py-2 rounded-md w-full text-white font-semibold hover:bg-sky-600 duration-500 shadow-md" />
+                        <input type="submit" value={cargando ? "Cargando..." : "Ingresar"} className="cursor-pointer bg-sky-500 py-2 rounded-md w-full text-white font-semibold hover:bg-sky-600 duration-500 shadow-md" />
                     </div>
                     <p className="text-xs text-gray-300">*No compartas tus datos</p>
+                    {
+                        error && <p className="font-bold bg-red-400 text-center shadow-lg text-red-900 rounded-lg">Error: {error}</p>
+                    }
                 </form>
             </div>
         </div>

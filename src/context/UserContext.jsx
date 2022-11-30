@@ -7,7 +7,7 @@ const UserContextProvider = ({ children }) => {
 
     useEffect(() => {
         setUsuario({
-            nombre: "Jonathan Zacarías",
+            nombre: "Usuario",
             fechaRegistro: "22/mayo/2000"
         })
     }, []);
